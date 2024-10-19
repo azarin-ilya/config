@@ -1,2 +1,6 @@
-myapp:
-  some: 123
+spring:
+  main:
+    banner-mode: off
+  output:
+    ansi:
+      enabled: ALWAYS
