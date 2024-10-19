@@ -1,6 +1,4 @@
 spring:
-  config:
-    import: configserver:http://localhost:3030
   main:
     banner-mode: off
   output:
