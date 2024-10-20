@@ -24,6 +24,15 @@ spring:
               args:
                 name: exampleServiceCommand
                 fallbackUri: forward:/fallback
+        - id: documentCreator
+          uri: lb://documentCreator
+          predicates:
+            - Path=/documentCreator/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: exampleServiceCommand
+                fallbackUri: forward:/fallback
 
 hystrix:
   command:
