@@ -1,0 +1,43 @@
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: pass
+          uri: lb://pass
+          predicates:
+            - Path=/pass/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: exampleServiceCommand
+                fallbackUri: forward:/fallback
+        - id: vc
+          uri: lb://vc
+          predicates:
+            - Path=/vc/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: exampleServiceCommand
+                fallbackUri: forward:/fallback
+        - id: documentCreator
+          uri: lb://documentCreator
+          predicates:
+            - Path=/documentCreator/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: exampleServiceCommand
+                fallbackUri: forward:/fallback
+
+hystrix:
+  command:
+    fallbackcmd:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 4000
